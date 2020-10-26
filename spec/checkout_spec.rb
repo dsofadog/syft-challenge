@@ -17,7 +17,7 @@ describe "Checkout" do
             end
 
             def add code:,item:
-                raise NotImplementedError
+                @items[code] = item 
             end
             def count
                 @items.count
