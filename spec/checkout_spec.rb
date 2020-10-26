@@ -54,6 +54,11 @@ describe "Checkout" do
             def add code:,item:
                 @items[code] = item 
             end
+
+            def get(code:)
+              @items[code]
+            end
+
             def count
                 @items.count
             end
@@ -71,7 +76,7 @@ describe "Checkout" do
         catalogue.add code: "001", item: product
         catalogue.add code: "002", item: Product.new(name: "Personalised cufflinks", price: 4500)
         catalogue.add code: "003", item: Product.new(name: "Kids T-shirt", price: 1995)
-        expect(catalogue.get("001")).to eq(product)
+        expect(catalogue.get(code: "001")).to eq(product)
     end
 
 
