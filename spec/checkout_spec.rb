@@ -115,18 +115,21 @@ describe "Checkout" do
         class Checkout
             def initialize(rules:[],catalougue: Catalogue.new)
                 @rules = rules
+                @catalougue = catalougue
+                @scanned_items = []
             end
             def scan(code:)
-
+                @scanned_items << @catalougue.get(code: code)
             end
             def total
-                0
+                @scanned_items.map{|p|p.price}.sum
             end
         end
 
         catalogue = Catalogue.new
-        product = Product.new(name: "Lavender heart", price: 925)
-        catalogue.add code: "001", item: product
+
+        
+        catalogue.add code: "001", item: Product.new(name: "Lavender heart", price: 925)
         catalogue.add code: "002", item: Product.new(name: "Personalised cufflinks", price: 4500)
         catalogue.add code: "003", item: Product.new(name: "Kids T-shirt", price: 1995)
 
