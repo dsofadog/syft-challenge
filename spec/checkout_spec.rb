@@ -122,7 +122,7 @@ describe "Checkout" do
                 @scanned_items << @catalougue.get(code: code)
             end
             def total
-                @scanned_items.map{|p|p.price}.sum
+                @scanned_items.map(&:price).sum
             end
         end
 
@@ -134,13 +134,13 @@ describe "Checkout" do
         catalogue.add code: "003", item: Product.new(name: "Kids T-shirt", price: 1995)
 
         promotional_rules = []
-        co = Checkout.new(rules:promotional_rules)
+        co = Checkout.new(rules:promotional_rules,catalougue: catalogue)
         co.scan(code: "001")
         price = co.total
         expect(price).to eq(925)
     end
 
-
+    
     
     
 end
