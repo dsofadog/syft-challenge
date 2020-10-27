@@ -141,7 +141,7 @@ describe "Checkout" do
     end
 
 
-    it "should be able to scan items in the checkout and get totals for two" do
+    it "should be able to scan items in the checkout and get totals for two items" do
 
         # Product code  | Name                   | Price
         # ----------------------------------------------------------
@@ -200,7 +200,7 @@ describe "Checkout" do
         co.scan(code: "001")
         co.scan(code: "002")
         price = co.total
-        expect(price).to eq(925)
+        expect(price).to eq(5425)
     end
 
 
