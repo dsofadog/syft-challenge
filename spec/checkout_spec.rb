@@ -140,6 +140,70 @@ describe "Checkout" do
         expect(price).to eq(925)
     end
 
+
+    it "should be able to scan items in the checkout and get totals for two" do
+
+        # Product code  | Name                   | Price
+        # ----------------------------------------------------------
+        # 001           | Lavender heart         | £9.25
+        # 002           | Personalised cufflinks | £45.00
+        # 003           | Kids T-shirt           | £19.95        
+
+        class Catalogue
+            def initialize()
+              @items = {}
+            end
+
+            def add code:,item:
+                @items[code] = item 
+            end
+
+            def get(code:)
+              @items[code]
+            end
+
+            def count
+                @items.count
+            end
+        end
+        class Product
+            attr_accessor :name, :price
+            def initialize(name:,price:)
+              @name = name
+              @price = price
+            end
+        end
+
+        class Checkout
+            def initialize(rules:[],catalougue: Catalogue.new)
+                @rules = rules
+                @catalougue = catalougue
+                @scanned_items = []
+            end
+            def scan(code:)
+                @scanned_items << @catalougue.get(code: code)
+            end
+            def total
+                @scanned_items.map(&:price).sum
+            end
+        end
+
+        catalogue = Catalogue.new
+
+        
+        catalogue.add code: "001", item: Product.new(name: "Lavender heart", price: 925)
+        catalogue.add code: "002", item: Product.new(name: "Personalised cufflinks", price: 4500)
+        catalogue.add code: "003", item: Product.new(name: "Kids T-shirt", price: 1995)
+
+        promotional_rules = []
+        co = Checkout.new(rules:promotional_rules,catalougue: catalogue)
+        co.scan(code: "001")
+        co.scan(code: "002")
+        price = co.total
+        expect(price).to eq(925)
+    end
+
+
     
     
     
