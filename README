@@ -9,5 +9,9 @@ pleae check the git history and you will see that I have checked in allong the w
 You will see lots of duplication and class definitions with inthe tests.
 
 Why ? Each test is seperate aapplication in my eyes so I copy an paste and amend
-until then end I clean up. Depending on the test I would even leave the duplication in.
+until then end I clean up. 
+
+Depending on the test I would even leave the duplication in. Testing is one place where
+I dont believe the DRY applies and in some cases the duplication can make the test less brittle.
+
 
