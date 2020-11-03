@@ -1,6 +1,6 @@
 #To Run then code
 
-bubdle exec rspec
+bundle exec rspec
 
 # Things to note.
 
